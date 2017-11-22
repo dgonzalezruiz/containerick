@@ -1,7 +1,6 @@
 #!/bin/sh
 set -euo pipefail
 
-LANG="C.UTF-8"
 DEFAULT_COLS=$(stty size 2>/dev/null | awk '{print $2}' || echo "1")
 SAFE=false
 COLS=$DEFAULT_COLS
@@ -36,6 +35,7 @@ shift $((OPTIND-1))
 
 FILE="$1"
 
+LANG="C.UTF-8"
 IFS=""
 MAX_LENGTH=$(while IFS= read -r line; do echo ${#line}; done < "$FILE" | sort -nr | head -1)
 SPAN=$(( $((COLS / 2)) - $((MAX_LENGTH / 2)) ))
